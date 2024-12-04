@@ -40,6 +40,6 @@ public class CarShowroomEntity {
     private String address;
 
     @OneToMany(mappedBy = "carShowroomEntity", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<CarEntity> cars = new ArrayList<>();
+    private List<CarEntity> carEntities = new ArrayList<>();
 }
 

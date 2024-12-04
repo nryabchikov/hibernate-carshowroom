@@ -48,13 +48,14 @@ public class ClientEntity {
             name = "contacts",
             joinColumns = @JoinColumn(name = "client_id")
     )
+    @Column(name = "contact")
     private Set<String> contacts = new HashSet<>();
 
     @Column(name = "date_of_registration")
     private Date dateOfRegistration;
 
     @ManyToMany(mappedBy = "clientEntities", cascade = CascadeType.ALL)
-    private List<CarEntity> carEntities = new ArrayList<>();
+    private Set<CarEntity> carEntities = new HashSet<>();
 
     @OneToMany(mappedBy = "clientEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ReviewEntity> reviewEntities = new ArrayList<>();

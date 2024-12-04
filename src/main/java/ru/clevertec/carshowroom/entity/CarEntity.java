@@ -20,7 +20,9 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "cars")
@@ -54,7 +56,7 @@ public class CarEntity {
     private CategoryEntity categoryEntity;
 
     @ManyToOne()
-    @JoinColumn(name = "car_showroom_id", nullable = false)
+    @JoinColumn(name = "car_showroom_id")
     private CarShowroomEntity carShowroomEntity;
 
     @ManyToMany(cascade = CascadeType.ALL)
@@ -63,7 +65,7 @@ public class CarEntity {
             joinColumns = @JoinColumn(name = "car_id"),
             inverseJoinColumns = @JoinColumn(name = "client_id")
     )
-    private List<ClientEntity> clientEntities = new ArrayList<>();
+    private Set<ClientEntity> clientEntities = new HashSet<>();
 
     @OneToMany(mappedBy = "carEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ReviewEntity> reviewEntities = new ArrayList<>();

@@ -26,7 +26,7 @@ import java.util.List;
 @Getter
 @ToString
 @Builder
-public class CategoryEntity {
+public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,7 +36,7 @@ public class CategoryEntity {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "categoryEntity", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<CarEntity> carEntities = new ArrayList<>();
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Car> cars = new ArrayList<>();
 }
 

@@ -2,34 +2,34 @@ package ru.clevertec.carshowroom.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import ru.clevertec.carshowroom.dto.review.AddReviewDTO;
-import ru.clevertec.carshowroom.dto.review.OutputReviewDTO;
-import ru.clevertec.carshowroom.dto.review.UpdateReviewDTO;
-import ru.clevertec.carshowroom.entity.ReviewEntity;
+import ru.clevertec.carshowroom.dto.review.ReviewRequest;
+import ru.clevertec.carshowroom.dto.review.ReviewResponse;
+import ru.clevertec.carshowroom.dto.review.UpdateReviewRequest;
+import ru.clevertec.carshowroom.entity.Review;
 
 import java.util.List;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface ReviewMapper {
-    @Mapping(source = "car", target = "carEntity")
-    @Mapping(source = "client", target = "clientEntity")
-    ReviewEntity toReviewEntity(AddReviewDTO addReviewDTO);
+    @Mapping(source = "car", target = "car")
+    @Mapping(source = "client", target = "client")
+    Review toReview(ReviewRequest reviewRequest);
 
-    @Mapping(source = "carEntity", target = "car")
-    @Mapping(source = "clientEntity", target = "client")
-    AddReviewDTO toAddReviewDTO(ReviewEntity reviewEntity);
+    @Mapping(source = "car", target = "car")
+    @Mapping(source = "client", target = "client")
+    ReviewRequest toAddReviewDTO(Review review);
 
-    @Mapping(source = "carEntity", target = "car")
-    @Mapping(source = "clientEntity", target = "client")
-    OutputReviewDTO toOutputReviewDTO(ReviewEntity reviewEntity);
+    @Mapping(source = "car", target = "car")
+    @Mapping(source = "client", target = "client")
+    ReviewResponse toOutputReviewDTO(Review review);
 
-    List<OutputReviewDTO> toOutputReviewDTOs(List<ReviewEntity> reviewEntities);
+    List<ReviewResponse> toOutputReviewDTOs(List<Review> reviews);
 
-    @Mapping(source = "car", target = "carEntity")
-    @Mapping(source = "client", target = "clientEntity")
-    ReviewEntity toReviewEntity(UpdateReviewDTO updateReviewDTO);
+    @Mapping(source = "car", target = "car")
+    @Mapping(source = "client", target = "client")
+    Review toReview(UpdateReviewRequest updateReviewRequest);
 
-    @Mapping(source = "carEntity", target = "car")
-    @Mapping(source = "clientEntity", target = "client")
-    UpdateReviewDTO toUpdateReviewDTO(ReviewEntity reviewEntity);
+    @Mapping(source = "car", target = "car")
+    @Mapping(source = "client", target = "client")
+    UpdateReviewRequest toUpdateReviewDTO(Review review);
 }

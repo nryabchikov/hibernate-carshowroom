@@ -19,6 +19,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -32,7 +34,7 @@ import java.util.Set;
 @Getter
 @ToString
 @Builder
-public class CarEntity {
+public class Car {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,29 +47,29 @@ public class CarEntity {
     @Column(name = "brand")
     private String brand;
 
-    @Column(name = "year")
-    private int year;
+    @Column(name = "production_date")
+    private LocalDate productionDate;
 
     @Column(name = "price")
-    private int price;
+    private BigDecimal price;
 
     @ManyToOne()
     @JoinColumn(name = "category_id", nullable = false)
-    private CategoryEntity categoryEntity;
+    private Category category;
 
     @ManyToOne()
     @JoinColumn(name = "car_showroom_id")
-    private CarShowroomEntity carShowroomEntity;
+    private CarShowroom carShowroom;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE, CascadeType.PERSIST, CascadeType.PERSIST})
     @JoinTable(
             name = "cars_clients",
             joinColumns = @JoinColumn(name = "car_id"),
             inverseJoinColumns = @JoinColumn(name = "client_id")
     )
-    private Set<ClientEntity> clientEntities = new HashSet<>();
+    private Set<Client> clients = new HashSet<>();
 
-    @OneToMany(mappedBy = "carEntity", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ReviewEntity> reviewEntities = new ArrayList<>();
+    @OneToMany(mappedBy = "car", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Review> reviews = new ArrayList<>();
 }
 

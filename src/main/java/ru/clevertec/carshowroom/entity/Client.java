@@ -19,8 +19,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -33,7 +33,7 @@ import java.util.Set;
 @Getter
 @ToString
 @Builder
-public class ClientEntity {
+public class Client {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -52,11 +52,14 @@ public class ClientEntity {
     private Set<String> contacts = new HashSet<>();
 
     @Column(name = "date_of_registration")
-    private Date dateOfRegistration;
+    private LocalDate dateOfRegistration;
 
-    @ManyToMany(mappedBy = "clientEntities", cascade = CascadeType.ALL)
-    private Set<CarEntity> carEntities = new HashSet<>();
+    @ManyToMany(
+            mappedBy = "clients",
+            cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.PERSIST}
+    )
+    private Set<Car> cars = new HashSet<>();
 
-    @OneToMany(mappedBy = "clientEntity", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ReviewEntity> reviewEntities = new ArrayList<>();
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Review> reviews = new ArrayList<>();
 }

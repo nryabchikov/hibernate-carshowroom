@@ -26,7 +26,7 @@ import java.util.List;
 @Getter
 @ToString
 @Builder
-public class CarShowroomEntity {
+public class CarShowroom {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,7 +39,7 @@ public class CarShowroomEntity {
     @Column(name = "address")
     private String address;
 
-    @OneToMany(mappedBy = "carShowroomEntity", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<CarEntity> carEntities = new ArrayList<>();
+    @OneToMany(mappedBy = "carShowroom", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Car> cars = new ArrayList<>();
 }
 

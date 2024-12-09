@@ -23,7 +23,7 @@ import lombok.ToString;
 @Getter
 @ToString
 @Builder
-public class ReviewEntity {
+public class Review {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,9 +38,9 @@ public class ReviewEntity {
 
     @ManyToOne
     @JoinColumn(name = "car_id", nullable = false)
-    private CarEntity carEntity;
+    private Car car;
 
     @ManyToOne
     @JoinColumn(name = "client_id", nullable = false)
-    private ClientEntity clientEntity;
+    private Client client;
 }

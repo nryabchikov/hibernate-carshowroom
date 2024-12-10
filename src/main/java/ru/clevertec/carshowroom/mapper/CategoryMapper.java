@@ -2,26 +2,26 @@ package ru.clevertec.carshowroom.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import ru.clevertec.carshowroom.dto.category.AddCategoryDTO;
-import ru.clevertec.carshowroom.dto.category.OutputCategoryDTO;
-import ru.clevertec.carshowroom.dto.category.UpdateCategoryDTO;
-import ru.clevertec.carshowroom.entity.CategoryEntity;
+import ru.clevertec.carshowroom.dto.category.CategoryRequest;
+import ru.clevertec.carshowroom.dto.category.CategoryResponse;
+import ru.clevertec.carshowroom.dto.category.UpdateCategoryRequest;
+import ru.clevertec.carshowroom.entity.Category;
 
 import java.util.List;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface CategoryMapper {
-    CategoryEntity toCategoryEntity(AddCategoryDTO addCategoryDTO);
+    Category toCategory(CategoryRequest categoryRequest);
 
-    AddCategoryDTO toAddCategoryDTO(CategoryEntity categoryEntity);
+    CategoryRequest toAddCategoryDTO(Category category);
 
-    @Mapping(source = "carEntities", target = "cars")
-    OutputCategoryDTO toOutputCategoryDTO(CategoryEntity categoryEntity);
+    @Mapping(source = "cars", target = "cars")
+    CategoryResponse toOutputCategoryDTO(Category category);
 
-    List<OutputCategoryDTO> toOutputCategoryDTOs(List<CategoryEntity> categoryEntities);
+    List<CategoryResponse> toOutputCategoryDTOs(List<Category> categoryEntities);
 
-    CategoryEntity toCategoryEntity(UpdateCategoryDTO updateCategoryDTO);
+    Category toCategory(UpdateCategoryRequest updateCategoryRequest);
 
-    UpdateCategoryDTO toUpdateCategoryDTO(CategoryEntity categoryEntity);
+    UpdateCategoryRequest toUpdateCategoryDTO(Category category);
 }
 

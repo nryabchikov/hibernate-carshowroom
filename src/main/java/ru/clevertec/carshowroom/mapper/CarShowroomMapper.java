@@ -2,26 +2,26 @@ package ru.clevertec.carshowroom.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import ru.clevertec.carshowroom.dto.carshowroom.AddCarShowroomDTO;
-import ru.clevertec.carshowroom.dto.carshowroom.OutputCarShowroomDTO;
-import ru.clevertec.carshowroom.dto.carshowroom.UpdateCarShowroomDTO;
-import ru.clevertec.carshowroom.entity.CarShowroomEntity;
+import ru.clevertec.carshowroom.dto.carshowroom.CarShowroomRequest;
+import ru.clevertec.carshowroom.dto.carshowroom.CarShowroomResponse;
+import ru.clevertec.carshowroom.dto.carshowroom.UpdateCarShowroomRequest;
+import ru.clevertec.carshowroom.entity.CarShowroom;
 
 import java.util.List;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface CarShowroomMapper {
-    CarShowroomEntity toCarShowroomEntity(AddCarShowroomDTO addCarShowroomDTO);
+    CarShowroom toCarShowroom(CarShowroomRequest carShowroomRequest);
 
-    AddCarShowroomDTO toAddCarShowroomDTO(CarShowroomEntity carShowroomEntity);
+    CarShowroomRequest toAddCarShowroomDTO(CarShowroom carShowroom);
 
-    @Mapping(source = "carEntities", target = "cars")
-    OutputCarShowroomDTO toOutputCarShowroomDTO(CarShowroomEntity carShowroomEntity);
+    @Mapping(source = "cars", target = "cars")
+    CarShowroomResponse toOutputCarShowroomDTO(CarShowroom carShowroom);
 
-    List<OutputCarShowroomDTO> toOutputCarShowroomDTOs(List<CarShowroomEntity> carShowroomEntities);
+    List<CarShowroomResponse> toOutputCarShowroomDTOs(List<CarShowroom> carShowrooms);
 
-    CarShowroomEntity toCarShowroomEntity(UpdateCarShowroomDTO updateCarShowroomDTO);
-    UpdateCarShowroomDTO toUpdateCarShowroomDTO(CarShowroomEntity carShowroomEntity);
+    CarShowroom toCarShowroom(UpdateCarShowroomRequest updateCarShowroomRequest);
+    UpdateCarShowroomRequest toUpdateCarShowroomDTO(CarShowroom carShowroom);
 
-    CarShowroomEntity toCarShowroomEntity(OutputCarShowroomDTO outputCarShowroomDTO);
+    CarShowroom toCarShowroom(CarShowroomResponse carShowroomResponse);
 }

@@ -2,45 +2,45 @@ package ru.clevertec.carshowroom.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import ru.clevertec.carshowroom.dto.car.AddCarDTO;
-import ru.clevertec.carshowroom.dto.car.OutputCarDTO;
-import ru.clevertec.carshowroom.dto.car.UpdateCarDTO;
-import ru.clevertec.carshowroom.entity.CarEntity;
+import ru.clevertec.carshowroom.dto.car.CarRequest;
+import ru.clevertec.carshowroom.dto.car.CarResponse;
+import ru.clevertec.carshowroom.dto.car.UpdateCarRequest;
+import ru.clevertec.carshowroom.entity.Car;
 
 import java.util.List;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface CarMapper {
-    @Mapping(source = "categoryId", target = "categoryEntity.id")
-    CarEntity toCarEntity(AddCarDTO addCarDTO);
+    @Mapping(source = "categoryId", target = "category.id")
+    Car toCar(CarRequest carRequest);
 
-    @Mapping(source = "categoryEntity.id", target = "categoryId")
-    AddCarDTO toAddCarDTO(CarEntity carEntity);
+    @Mapping(source = "category.id", target = "categoryId")
+    CarRequest toAddCarDTO(Car car);
 
-    @Mapping(source = "categoryId", target = "categoryEntity.id")
-    @Mapping(source = "categoryName", target = "categoryEntity.name")
-    @Mapping(source = "showroomTitle", target = "carShowroomEntity.title")
-    @Mapping(source = "showroomId", target = "carShowroomEntity.id")
-    @Mapping(source = "clients", target = "clientEntities")
-    @Mapping(source = "reviews", target = "reviewEntities")
-    CarEntity toCarEntity(OutputCarDTO outputCarDTO);
+    @Mapping(source = "categoryId", target = "category.id")
+    @Mapping(source = "categoryName", target = "category.name")
+    @Mapping(source = "showroomTitle", target = "carShowroom.title")
+    @Mapping(source = "showroomId", target = "carShowroom.id")
+    @Mapping(source = "clients", target = "clients")
+    @Mapping(source = "reviews", target = "reviews")
+    Car toCar(CarResponse carResponse);
 
-    @Mapping(source = "categoryEntity.id", target = "categoryId")
-    @Mapping(source = "categoryEntity.name", target = "categoryName")
-    @Mapping(source = "carShowroomEntity.title", target = "showroomTitle")
-    @Mapping(source = "carShowroomEntity.id", target = "showroomId") //////////
-    @Mapping(source = "clientEntities", target = "clients")
-    @Mapping(source = "reviewEntities", target = "reviews")
-    OutputCarDTO toOutputCarDTO(CarEntity carEntity);
+    @Mapping(source = "category.id", target = "categoryId")
+    @Mapping(source = "category.name", target = "categoryName")
+    @Mapping(source = "carShowroom.title", target = "showroomTitle")
+    @Mapping(source = "carShowroom.id", target = "showroomId")
+    @Mapping(source = "clients", target = "clients")
+    @Mapping(source = "reviews", target = "reviews")
+    CarResponse toOutputCarDTO(Car car);
 
-    List<OutputCarDTO> toOutputCarDTOs(List<CarEntity> carEntities);
+    List<CarResponse> toOutputCarDTOs(List<Car> cars);
 
-    @Mapping(source = "categoryId", target = "categoryEntity.id")
-    CarEntity toCarEntity(UpdateCarDTO updateCarDTO);
+    @Mapping(source = "categoryId", target = "category.id")
+    Car toCar(UpdateCarRequest updateCarRequest);
 
-    @Mapping(source = "categoryEntity.id", target = "categoryId")
-    UpdateCarDTO toUpdateCarDTO(CarEntity carEntity);
+    @Mapping(source = "category.id", target = "categoryId")
+    UpdateCarRequest toUpdateCarDTO(Car car);
 
-    UpdateCarDTO toUpdateCarDTO(OutputCarDTO outputCarDTO);
+    UpdateCarRequest toUpdateCarDTO(CarResponse carResponse);
 }
 

@@ -2,31 +2,31 @@ package ru.clevertec.carshowroom.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import ru.clevertec.carshowroom.dto.client.AddClientDTO;
-import ru.clevertec.carshowroom.dto.client.OutputClientDTO;
-import ru.clevertec.carshowroom.dto.client.UpdateClientDTO;
-import ru.clevertec.carshowroom.entity.ClientEntity;
+import ru.clevertec.carshowroom.dto.client.ClientRequest;
+import ru.clevertec.carshowroom.dto.client.ClientResponse;
+import ru.clevertec.carshowroom.dto.client.UpdateClientRequest;
+import ru.clevertec.carshowroom.entity.Client;
 
 import java.util.List;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface ClientMapper {
-    ClientEntity toClientEntity(AddClientDTO addClientDTO);
+    Client toClient(ClientRequest clientRequest);
 
-    AddClientDTO toAddClientDTO(ClientEntity clientEntity);
+    ClientRequest toAddClientDTO(Client client);
 
-    @Mapping(source = "carEntities", target = "cars")
-    @Mapping(source = "reviewEntities", target = "reviews")
-    OutputClientDTO toOutputClientDTO(ClientEntity clientEntity);
+    @Mapping(source = "cars", target = "cars")
+    @Mapping(source = "reviews", target = "reviews")
+    ClientResponse toOutputClientDTO(Client client);
 
-    List<OutputClientDTO> toOutputClientDTOs(List<ClientEntity> clientEntities);
+    List<ClientResponse> toOutputClientDTOs(List<Client> clients);
 
-    ClientEntity toClientEntity(UpdateClientDTO updateClientDTO);
+    Client toClient(UpdateClientRequest updateClientRequest);
 
-    UpdateClientDTO toUpdateClientDTO(ClientEntity clientEntity);
+    UpdateClientRequest toUpdateClientDTO(Client client);
 
-    UpdateClientDTO toUpdateClientDTO(OutputClientDTO outputClientDTO);
+    UpdateClientRequest toUpdateClientDTO(ClientResponse clientResponse);
 
-    @Mapping(source = "cars", target = "carEntities")
-    ClientEntity toClientEntity(OutputClientDTO clientDTO);
+    @Mapping(source = "cars", target = "cars")
+    Client toClient(ClientResponse clientDTO);
 }
